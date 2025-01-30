@@ -10,7 +10,6 @@
         <Navbar />
         <Home />
         <About />
-        <Contact />
         <Footer />
       </div>
     );

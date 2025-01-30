@@ -9,7 +9,7 @@ export default function Home() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const code = event.target.code.value.replace(/-/g, "");
+    const code = event.target.code.value;
 
     if (!code) {
       setNotification({
@@ -63,27 +63,17 @@ export default function Home() {
   };
 
   return (
-    <div
-      id="home"
-      className="flex flex-col bg-gradient-to-b from-sky-950 to-white items-center justify-center text-center min-h-screen relative overflow-hidden"
-    >
+    <div id="home" className="flex flex-col bg-white items-center justify-center text-center min-h-screen relative overflow-hidden">
       <div>
-        <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-16 md:mb-16 relative z-10 transition-all duration-300">
-          EXCERCISE Verify
-        </h1>
+        <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-16 md:mb-16 relative z-10 transition-all duration-300">EXCERCISE Verify</h1>
 
-        <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 md:mb-10 relative z-10 animate-slideUp">
-          Verify Your Certificate!
-        </p>
+        <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 md:mb-10 relative z-10 animate-slideUp">Verify Your Certificate!</p>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 px-4 animate-slideUp delay-200"
-        >
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 px-4 animate-slideUp delay-200">
           <input
             type="text"
             name="code"
-            placeholder="Enter certificate ID (XXXX-XXXX-XXXX)"
+            placeholder="Enter certificate ID (EXXXX-X-XXX-XXX)"
             className="w-full sm:w-[350px] md:w-[450px] lg:w-[550px] p-3 rounded-lg border border-blue-100 
                      text-gray-800 shadow-sm shadow-black focus:outline-none focus:ring-2 focus:ring-sky-300
                      transform hover:scale-102 transition-all duration-300"
@@ -109,16 +99,8 @@ export default function Home() {
         </div>
       )}
 
-      <img
-        src="/bk1.png"
-        alt="Decoration"
-        className="absolute bottom-0 right-0 w-28 sm:w-40 md:w-80 h-auto transition-all duration-300 animate-float opacity-40"
-      />
-      <img
-        src="/ak1.png"
-        alt="Decoration"
-        className="absolute top-0 right-0 w-40 sm:w-60 md:w-80 h-auto transition-all duration-300 animate-float delay-150 opacity-50"
-      />
+      <img src="/bk1.png" alt="Decoration" className="absolute bottom-0 right-0 w-28 sm:w-40 md:w-80 h-auto transition-all duration-300 animate-float opacity-40" />
+      <img src="/ak1.png" alt="Decoration" className="absolute top-0 right-0 w-40 sm:w-60 md:w-80 h-auto transition-all duration-300 animate-float delay-150 opacity-50" />
     </div>
   );
 }
