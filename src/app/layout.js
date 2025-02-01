@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";  // Import Toaster from Sonner
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +23,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {/* Add Toaster component to enable toast notifications globally */}
+        <Toaster position="top-right" richColors />
+        
+        {children} {/* Render child components (pages) */}
       </body>
     </html>
   );
