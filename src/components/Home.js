@@ -34,23 +34,23 @@ const Home = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const code = event.target.code.value;
-
+  
     if (!code) {
       toast.error("Please enter a certificate code!");
       return;
     }
-
+  
     const id = toast.loading("Verifying...");
     setToastId(id);
     setIsLoading(true);
-
+  
     try {
       const res = await fetch(`/api/certificates/${code}`);
       const data = await res.json();
-
+  
       toast.dismiss(id);
-
-      if (data) {
+  
+      if (data && data.recipient) {  
         const date = dayjs(data.created_at);
         toast.success(
           <>
@@ -66,10 +66,14 @@ const Home = () => {
         setModalOpen(true);
       } else {
         toast.error("Certificate with the given ID was not found!");
+        setCertificate(null);
+        setModalOpen(false);  // Ensure modal doesn't open
       }
     } catch (error) {
       console.error("Error verifying certificate:", error);
       toast.error("An error occurred. Please try again.");
+      setCertificate(null);
+      setModalOpen(false);  // Ensure modal doesn't open
     } finally {
       setIsLoading(false);
     }
@@ -93,11 +97,19 @@ const Home = () => {
             Certify
           </motion.span>{" "}
           <motion.span
+          className="bg-gradient-to-r from-purple_3 to-gray_2 bg-clip-text text-transparent"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 3 }}
           >
-            Me
+            Your
+          </motion.span>{" "}
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 3 }}
+          >
+            Certificate
           </motion.span>
         </h1>
         <motion.div
@@ -113,13 +125,13 @@ const Home = () => {
               type="text"
               name="code"
               placeholder="Enter certificate ID (EXXXX-X-XXX-XXX)"
-              className="w-full sm:w-[350px] md:w-[450px] lg:w-[550px] p-3 rounded-lg border border-gray-300 text-gray-800 shadow-md focus:outline-none focus:ring-2 focus:ring-purple_4 transition-all"
+              className="w-full max-sm:w-[350px] sm:w-[400px] md:w-[500px] lg:w-[550px] p-3 rounded-lg border border-gray-300 text-gray-800 shadow-md focus:outline-none focus:ring-2 focus:ring-purple_4 transition-all"
             />
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full sm:w-auto p-3 px-8 rounded-lg shadow-md bg-gradient-to-r from-purple_4 to-blue_3 text-white font-semibold ${
-                isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"
+              className={`w-full max-sm:w-[200px] md:w-[120px] p-3 px-8 rounded-lg shadow-md bg-gradient-to-r from-purple_4 to-blue_3 text-white font-semibold ${
+                isLoading ? "w-[170px] md:w-[210px] opacity-50 cursor-not-allowed" : "hover:scale-105"
               }`}
             >
               {isLoading ? "Verifying..." : "Verify"}
