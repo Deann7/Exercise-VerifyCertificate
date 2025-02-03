@@ -1,28 +1,38 @@
+import dayjs from "dayjs";
 import Image from "next/image";
 import React from "react";
 import { RiCloseCircleFill } from "react-icons/ri";
 
-const PopUp = () => {
+const PopUp = ({ modalOpen, data, setModalOpen }) => {
+  
+  const date = dayjs(data?.created_at).format("DD/MM/YYYY");
+  if (!modalOpen) return null;
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
-      <div className="shadow-xl rounded-lg p-4 w-[680px] h-auto relative">
-        <div className="flex justify-between items-center ">
-          <h1 className="font-extrabold text-4xl bg-gradient-to-r from-purple_3 to-gray_2 bg-clip-text text-transparent">
+    <div className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center h-screen w-screen bg-black bg-opacity-50">
+      {" "}
+      <div className="shadow-xl max-h-[90%] scrollbar-hidden overflow-y-scroll  rounded-lg px-4 w-[680px] h-auto relative bg-white">
+        <div className=" flex items-center sticky bg-white z-30 h-full top-0 py-2 w-full mb-2">
+          <h1 className=" w-full  text-center font-extrabold text-4xl bg-gradient-to-r from-purple_3 to-gray_2 bg-clip-text text-transparent">
             Exercise Certify
           </h1>
-          <RiCloseCircleFill className="bg-gray-600 rounded-full size-6 cursor-pointer" />
+          <RiCloseCircleFill
+            className="absolute right-0 top-4 bg-gray-600 rounded-full size-6 cursor-pointer"
+            onClick={() => {
+              setModalOpen(false);
+            }}
+          />
         </div>
-        <div className="flex flex-col justify-center items-center mb-4">
+        <div className="flex  flex-col justify-center items-center mb-4">
           <div className="mt-8 bg-gray-300 w-full rounded-lg h-auto p-6">
             <div className="bg-white shadow-lg rounded-lg px-6 w-full h-10 mb-3 flex items-center justify-between">
               <h1 className="text-lg font-medium text-black">
                 Certificate ID:{" "}
-                <span className="font-semibold">EXXXX-X-XXX-XXX</span>
+                <span className="font-semibold">{data?.certId}</span>
               </h1>
             </div>
             <div className="w-full h-auto bg-white shadow-lg rounded-lg flex items-center justify-between">
               <Image
-                src="/ContohSertifikat.jpg"
+                src={data?.image}
                 alt="Gambar Sertifikat"
                 width={800}
                 height={1000}
@@ -34,21 +44,22 @@ const PopUp = () => {
             <div className="grid grid-cols-2 gap-4 w-[80%]">
               <div className="text-black text-md">
                 <p>
-                  Recipient: <span className="font-semibold">John Doe</span>
+                  Recipient:{" "}
+                  <span className="font-semibold">{data?.recipient}</span>
                 </p>
               </div>
               <div className="text-black text-md">
                 <p>
-                  As: <span className="font-semibold">Speaker</span>
+                  As: <span className="font-semibold">{data?.partOf}</span>
                 </p>
               </div>
               <div className="flex flex-col text-black text-md">
                 <p>Issued By Execise For Event:</p>
-                <p className="font-semibold">Talkshow Exercise 2025</p>
+                <p className="font-semibold">{data?.event}</p>
               </div>
               <div className="text-black text-md">
                 <p>
-                  Date: <span className="font-semibold">12/12/2025</span>
+                  Date: <span className="font-semibold">{date}</span>
                 </p>
               </div>
             </div>
@@ -71,11 +82,11 @@ const PopUp = () => {
             <div className="w-full h-auto mt-4 px-2">
               <p className="text-black font-medium text-center italic">
                 This Certificate is given to{" "}
-                <span className="font-semibold">John Doe</span> for his
+                <span className="font-semibold">{data?.recipient}</span> for his
                 participation as a{" "}
-                <span className="font-semibold">Speaker</span> in the event{" "}
-                <span className="font-semibold">Talkshow Exercise 2025</span> on{" "}
-                <span className="font-semibold">12/12/2025</span>.
+                <span className="font-semibold">{data?.partOf}</span> in the
+                event <span className="font-semibold">{data?.event}</span> on{" "}
+                <span className="font-semibold">{date}</span>.
               </p>
             </div>
           </div>

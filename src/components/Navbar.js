@@ -4,7 +4,12 @@ import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useMotionValueEvent, useScroll, motion, AnimatePresence } from "framer-motion";
+import {
+  useMotionValueEvent,
+  useScroll,
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
@@ -19,7 +24,10 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target)
+      ) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -70,7 +78,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixed z-[100] w-full px-4 py-3 lg:py-8 lg:px-16">
+    <div className="fixed z-20 w-full px-4 py-3 lg:py-8 lg:px-16">
       <motion.div
         className="hidden lg:flex justify-center w-full items-center"
         initial={{ opacity: 0, y: isFirstRender ? -50 : 0 }}
