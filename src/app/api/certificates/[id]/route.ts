@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 import { supabase } from "../../../../../utils/supabaseClient";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+interface Props {
+  params: Promise<{ id: string }>;
+}
+
+export async function GET(req: Request, { params: paramsPromise }: Props) {
   try {
+    const params = await paramsPromise;
     if (!params || !params.id) {
       return NextResponse.json(
         { error: "Missing ID parameter" },
