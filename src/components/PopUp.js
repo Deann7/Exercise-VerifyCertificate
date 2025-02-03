@@ -1,10 +1,63 @@
 import dayjs from "dayjs";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { RiCloseCircleFill } from "react-icons/ri";
+import { toast } from "sonner";
 
 const PopUp = ({ modalOpen, data, setModalOpen }) => {
-  
+  const imgRef = useRef(null);
+
+  // pdf nya belum hd deh :(
+  const handleDownloadPDF = async () => {
+    const canvas = await html2canvas(imgRef.current, {
+      scale: 6,
+      useCORS: true,
+    });
+
+    const imgData = canvas.toDataURL("image/png", 1.0);
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+
+    const pdf = new jsPDF({
+      orientation: imgHeight > imgWidth ? "portrait" : "landscape",
+      unit: "mm",
+      format: [imgWidth * 0.2645, imgHeight * 0.2645],
+    });
+
+    pdf.addImage(
+      imgData,
+      "PNG",
+      0,
+      0,
+      imgWidth * 0.2645,
+      imgHeight * 0.2645,
+      "",
+      "FAST"
+    );
+    pdf.save(`${data.recipient}-certificate.pdf`);
+  };
+
+  const handleDownloadPNG = () => {
+    html2canvas(imgRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = `${data.recipient}-certificate.png`;
+      link.click();
+    });
+  };
+
+  const handleCopyImage = () => {
+    html2canvas(imgRef.current).then((canvas) => {
+      canvas.toBlob((blob) => {
+        navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+        toast("Image copied to clipboard!");
+      });
+    });
+  };
+
   const date = dayjs(data?.created_at).format("DD/MM/YYYY");
   if (!modalOpen) return null;
   return (
@@ -31,12 +84,14 @@ const PopUp = ({ modalOpen, data, setModalOpen }) => {
               </h1>
             </div>
             <div className="w-full h-auto bg-white shadow-lg rounded-lg flex items-center justify-between">
-              <Image
-                src={data?.image}
-                alt="Gambar Sertifikat"
-                width={800}
-                height={1000}
-              />
+              <div ref={imgRef}>
+                <Image
+                  src={data?.image}
+                  alt="Gambar Sertifikat"
+                  width={800}
+                  height={1000}
+                />
+              </div>
             </div>
           </div>
           <div className="w-full mt-3 text-left">
@@ -68,13 +123,22 @@ const PopUp = ({ modalOpen, data, setModalOpen }) => {
                 Download Certificate:{" "}
               </h1>
               <div className="grid grid-cols-3 gap-3">
-                <button className="bg-gradient-to-r from-blue_3 to-purple_3 text-white font-semibold p-2 rounded-lg hover:bg-blue-400">
+                <button
+                  onClick={handleDownloadPDF}
+                  className="bg-gradient-to-r from-blue_3 to-purple_3 text-white font-semibold p-2 rounded-lg hover:bg-blue-400"
+                >
                   as PDF
                 </button>
-                <button className="bg-gradient-to-r from-blue_3 to-purple_3 text-white font-semibold p-2 rounded-lg hover:bg-blue-400">
+                <button
+                  onClick={handleDownloadPNG}
+                  className="bg-gradient-to-r from-blue_3 to-purple_3 text-white font-semibold p-2 rounded-lg hover:bg-blue-400"
+                >
                   as PNG
                 </button>
-                <button className="bg-gradient-to-r from-blue_3 to-purple_3 text-white font-semibold p-2 rounded-lg hover:bg-blue-400">
+                <button
+                  onClick={handleCopyImage}
+                  className="bg-gradient-to-r from-blue_3 to-purple_3 text-white font-semibold p-2 rounded-lg hover:bg-blue-400"
+                >
                   Copy Image
                 </button>
               </div>
