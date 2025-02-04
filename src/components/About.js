@@ -4,7 +4,7 @@ export default function About() {
       id="about"
       className="min-h-screen bg-white flex items-center justify-center px-4 sm:px-8 py-8 relative"
     >
-      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
+      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-24">
         <div className="w-full md:w-1/2 flex justify-center transform hover:scale-105 transition-all duration-300">
           <img
             src="/ContohSertifikat.jpg"
