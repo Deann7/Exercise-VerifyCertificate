@@ -86,7 +86,7 @@ const Home = () => {
         data={certificate}
         setModalOpen={setModalOpen}
       />
-      <div className="w-full h-screen flex flex-col justify-center items-center text-center space-y-6">
+      <div className="w-full h-screen flex flex-col justify-center items-center text-center px-4 space-y-6">
         <h1 className="text-7xl max-md:text-4xl mt-10 lg:mt-20 md:mt-16 sm:mt-12 font-black text-blue_3">
           <motion.span
             className="bg-gradient-to-r from-purple_3 to-gray_2 bg-clip-text text-transparent"
