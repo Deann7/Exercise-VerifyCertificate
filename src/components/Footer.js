@@ -35,7 +35,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-row items-start gap-4 px-8 mt-6">
             <Image src="/email.svg" alt="email" width={24} height={24} />
-            <p className="text-md text-white">hr@exerciseftui.com</p>
+            <p className="text-md text-white">relation@exerciseftui.com</p>
           </div>
           <div className="flex flex-col items-start gap-2 px-8 mt-6">
             <p className="text-md text-white font-extrabold">Follow us</p>
@@ -96,10 +96,10 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <div className="flex row-span-1 gap-2 items-center text-xs">
+            <div className="flex row-span-1 gap-1 items-center text-xs max-sm:flex-col max-sm:items-start max-sm:pt-3">
               <Image src="/email.svg" alt="email" width={20} height={20} />
               <p className="text-md text-white truncate">
-                hr@exerciseftui.com
+                relation@exerciseftui.com
               </p>
             </div>
           </div>

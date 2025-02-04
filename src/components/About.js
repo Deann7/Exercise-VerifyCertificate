@@ -19,15 +19,15 @@ export default function About() {
           </h2>
           <div className="space-y-4">
             <p className="text-gray-700 text-base sm:text-lg">
-              Exercise Verify adalah platform online yang dirancang untuk
-              memverifikasi keaslian sertifikat yang diterbitkan oleh Exercise
-              FTUI. Layanan ini memastikan bahwa setiap sertifikat yang diterima
-              oleh peserta adalah asli dan valid.
+              Exercise Verify is an online platform designed to authenticate the
+              legitimacy of certificates issued by Exercise FTUI. This service
+              ensures that every certificate received by participants is genuine
+              and valid.
             </p>
             <p className="text-gray-700 text-base sm:text-lg">
-              Platform ini memudahkan proses verifikasi dengan sistem yang cepat
-              dan akurat. Dengan demikian, transparansi dan kepercayaan terhadap
-              sertifikat dapat terjaga dengan baik.
+              The platform simplifies the verification process with a fast and
+              accurate system, ensuring transparency and trust in the
+              certificates.
             </p>
           </div>
         </div>
