@@ -4,7 +4,7 @@ export default function About() {
       id="about"
       className="min-h-screen bg-white flex items-center justify-center px-4 sm:px-8 py-8 relative"
     >
-      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
+      <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-24">
         <div className="w-full md:w-1/2 flex justify-center transform hover:scale-105 transition-all duration-300">
           <img
             src="/ContohSertifikat.jpg"
@@ -33,21 +33,6 @@ export default function About() {
         </div>
       </div>
 
-      <img
-        src="/ak2.png"
-        alt="Decoration"
-        className="absolute top-0 opacity-40 right-0 w-28 sm:w-40 md:w-80 h-auto animate-float z-10"
-      />
-      <img
-        src="/bk2.png"
-        alt="Decoration"
-        className="absolute bottom-0 opacity-40 right-0 w-12 sm:w-16 md:w-28 h-auto animate-float delay-150"
-      />
-      <img
-        src="/bl2.png"
-        alt="Decoration"
-        className="absolute bottom-0 opacity-40 left-0 w-12 sm:w-16 md:w-28 h-auto animate-float delay-300"
-      />
     </div>
   );
 }
